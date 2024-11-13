@@ -1,0 +1,189 @@
+body {
+    margin: 0;
+    font-family: VT323;
+    line-height: 1.4;
+    background-color: #000000;
+    color: rgb(230, 230, 230);
+
+
+}
+
+
+@keyframes infiniteScroll {
+    from {
+        transform: translateX(0)
+    }
+
+    to {
+        transform: translateX(-50%)
+    }
+}
+
+
+.title {
+    position: fixed;
+    top: 0;
+    background-color: #000000;
+
+}
+
+.title:hover{
+    cursor: default;
+}
+
+.top{
+    margin-top: -15px;
+}
+
+.container {
+    overflow-x: hidden;
+}
+
+.container:hover {
+    cursor: default;
+}
+
+.horizontal-scrolling-items {
+    display: flex;
+    white-space: nowrap;
+    margin-top: -15px;
+
+}
+
+.horizontal-scrolling-items__item_small {
+    white-space: nowrap;
+    font-size: 50px;
+    animation-name: infiniteScroll;
+    animation-duration: 9s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+
+
+}
+
+.horizontal-scrolling-items__item_tall {
+
+    white-space: nowrap;
+    font-size: 100px;
+    animation-name: infiniteScroll;
+    animation-duration: 8.8s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+
+
+
+}
+
+
+
+
+
+
+
+
+.first-pic-container {
+    margin-top: 50px;
+
+}
+
+.pic-container {
+    border: solid rgb(63, 63, 63) 1px;
+    position: relative;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 80px;
+}
+
+.image {
+    display: block;
+    width: 100%;
+    height: auto;
+
+}
+
+.pic-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+
+
+    background-color: #000000;
+}
+
+.pic-container:hover .pic-overlay {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.pic-text {
+    color: rgb(230, 230, 230);
+    font-size: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+
+    
+
+}
+
+@media only screen and (min-width: 700px) {
+    .pic-text{
+        font-size: 70px;
+    }
+}
+
+
+
+
+.about-button {
+    font-size: 40px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 80px;
+    background-color: #000000;
+    padding: 0 10px 4px 0;
+
+
+    @media (max-width: 600px) {
+        font-size: 40px;
+        line-height: normal;
+
+    }
+
+
+}
+
+
+.about-button:hover {
+    color: rgb(43, 174, 43);
+    cursor: pointer;
+}
+
+.linkSpanner{
+    position:absolute; 
+    width:100%;
+    height:100%;
+    top:0;
+    left: 0;
+    z-index: 1;
+  
+}   
+
+
+.copyright{
+    font-family: "Tomorrow";
+    text-align: center;
+    margin-bottom: 35px;
+}
+

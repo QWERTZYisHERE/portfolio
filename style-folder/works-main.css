@@ -1,0 +1,197 @@
+body {
+    margin: 0;
+    font-family: VT323;
+    line-height: 1.4;
+    background-color: #000000;
+    color: rgb(205, 205, 205);
+}
+
+#title {
+    font-size: 80px;
+    margin-top: -15px;
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+
+    @media (max-width: 600px) {
+        margin-left: 0;
+        text-align: center;
+        font-size: 80px;
+        display: block;
+
+    }
+}
+
+#cc-title {
+    font-size: 80px;
+    margin-top: -15px;
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+
+    @media (max-width: 600px) {
+        margin-left: 0;
+        text-align: center;
+        font-size: 50px;
+        display: block;
+
+    }
+}
+
+.text{
+    line-height: 1.4;
+    font-size: 20px;
+    display:grid; 
+    grid-template-columns: 1fr 3.5fr 1.5fr;
+    font-family: "Tomorrow";
+    margin-top: 20px;
+
+    @media (max-width: 600px) {
+        grid-template-columns: 0.25fr 2fr 0.25fr;
+
+
+    }
+
+}
+
+.about-button {
+    font-size: 40px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 80px;
+    height: 50px;
+    background-color: #000000;
+    padding: 0 10px 10px 10px;
+}
+
+.about-button:hover {
+    color: rgb(43, 174, 43);
+    cursor: pointer;
+}
+
+.main-page-button {
+    font-family: VT323;
+    font-size: 40px;
+    position: fixed;
+    bottom: 0;
+    width: 150px;
+    padding: 10px;
+    height: 50px;
+}
+
+.black-box{
+    display: none;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #000000;
+    @media (max-width: 600px) {
+        display:block;
+
+
+    }
+}
+
+.main-page-button:hover {
+    color: rgb(43, 174, 43);
+    cursor: pointer;
+}
+
+.linkSpanner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+
+}
+
+video {
+    margin-top: 30px;
+    width: 100%;
+
+}
+
+.video-grid{
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    @media (max-width: 600px) {
+        display: block;
+        margin-left: 10px;
+        margin-right: 10px;
+
+    }
+}
+
+.img-grid{
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr 1fr;
+    gap: 15px;
+
+    @media (max-width: 600px) {
+        display: block;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-top: 30px;
+
+    }
+}
+
+img{
+    width: 100%;
+}
+
+.credit-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 2fr 1fr;
+    gap: 15px;
+
+    margin-top: 50px;
+    margin-bottom: 70px;
+
+    color: rgb(43, 174, 43);
+
+    @media (max-width: 600px) {
+        grid-template-columns: 0.15fr 1fr 0.75fr;
+
+    }
+}
+
+.undertitle{
+    font-size: 30px;
+    @media (max-width: 600px) {
+        font-size: 30px;
+
+    }
+}
+
+dt{
+    font-family: "Tomorrow";
+    font-size: 20px;
+    color: rgb(205, 205, 205);
+
+    @media (max-width: 600px) {
+        font-size: 20px;
+
+    }
+
+}
+.hidden-p{
+    display: none;
+    @media (max-width: 600px) {
+        display: block;
+
+    }
+
+}
+
+
+p{
+    @media (max-width: 600px) {
+        
+
+    }
+}
+
