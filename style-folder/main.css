@@ -24,6 +24,7 @@ body {
     position: fixed;
     top: 0;
     background-color: #000000;
+    -webkit-backface-visibility: hidden;
 
 }
 
