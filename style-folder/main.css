@@ -39,9 +39,7 @@ body {
     overflow-x: hidden;
 }
 
-.container:hover {
-    cursor: default;
-}
+
 
 .horizontal-scrolling-items {
     display: flex;
@@ -111,10 +109,6 @@ body {
     background-color: #000000;
 }
 
-.pic-container:hover .pic-overlay {
-    opacity: 1;
-    cursor: pointer;
-}
 
 .pic-text {
     color: rgb(230, 230, 230);
