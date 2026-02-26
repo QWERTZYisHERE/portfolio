@@ -21,7 +21,6 @@ body {
 
 
 .title {
-    position: fixed;
     top: 0;
     background-color: #000000;
     -webkit-backface-visibility: hidden;
@@ -77,13 +76,8 @@ body {
 
 
 
-
-
-
-
-
 .first-pic-container {
-    margin-top: 50px;
+    margin-top: 20px;
 
 }
 
