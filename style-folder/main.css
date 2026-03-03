@@ -20,68 +20,118 @@ body {
 }
 
 
-*{box-sizing:border-box}
+* {
+    box-sizing: border-box
+}
 
 /* Slideshow container */
+/* overflow hidden on the container clips the rail */
 .slideshow-container {
-  max-width: 700px;
-  position: relative;
-  margin-left: auto;
-  margin-right: 80px;
-  margin-bottom: 80px;
-  margin-top: 40px;
+    max-width: 700px;
+    overflow: hidden;
+    position: relative;
+    margin-left: auto;
+    margin-right: 80px;
+    margin-bottom: 80px;
 }
 
-/* Hide the images by default */
-.mySlides {
-  display: none;
+/* rail: all slides in a row */
+.slides-rail {
+    display: flex;
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
 }
+
+/* each slide takes the full width */
+.mySlides {
+    display: block;
+    flex: 0 0 100%;
+    position: relative;
+}
+
+/* caption bar */
+.slide-caption {
+    font-family: "Tomorrow", sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 10px 14px 12px;
+    color: rgb(160, 160, 160);
+    border-top: 1px solid rgb(40, 40, 40);
+}
+
+/* dot indicators */
+.dots {
+    display: none;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0 12px;
+}
+
+.dot {
+    display: none;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgb(80, 80, 80);
+    cursor: pointer;
+    transition: background 0.25s, transform 0.25s;
+}
+
+.dot.active {
+    background: rgb(230, 230, 230);
+    transform: scale(1.3);
+}
+
+
 
 /* Next & previous buttons */
-.prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  margin-top: -22px;
-  padding: 16px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
 }
 
 /* Position the "next button" to the right */
 .next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
+    right: 0;
+    border-radius: 3px 0 0 3px;
 }
 
 /* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 /* Caption text */
 .text {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
 }
 
 /* Number text (1/3 etc) */
 .numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
 }
 
 
@@ -94,11 +144,11 @@ body {
 
 }
 
-.title:hover{
+.title:hover {
     cursor: default;
 }
 
-.top{
+.top {
     margin-top: -15px;
 }
 
@@ -188,12 +238,12 @@ body {
     transform: translate(-50%, -50%);
     text-align: center;
 
-    
+
 
 }
 
 @media only screen and (min-width: 700px) {
-    .pic-text{
+    .pic-text {
         font-size: 70px;
     }
 }
@@ -226,18 +276,18 @@ body {
     cursor: pointer;
 }
 
-.linkSpanner{
-    position:absolute; 
-    width:100%;
-    height:100%;
-    top:0;
+.linkSpanner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
     left: 0;
     z-index: 1;
-  
-}   
+
+}
 
 
-.copyright{
+.copyright {
     font-family: "Tomorrow";
     text-align: center;
     margin-bottom: 35px;
@@ -352,3 +402,94 @@ body {
     }
 }
 
+.project-info {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 0 48px;
+  padding: 48px;
+  max-width: 900px;
+  font-family: "Tomorrow", sans-serif;
+}
+
+.project-info__title {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgb(230, 230, 230);
+  padding-top: 4px;
+}
+
+.project-info__desc {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgb(230, 230, 230);
+  line-height: 1.6;
+  margin: 0 0 28px;
+}
+
+.project-info__meta {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.project-info__meta li {
+  font-size: 14px;
+  color: rgb(140, 140, 140);
+}
+
+.meta-label {
+  color: rgb(140, 140, 140);
+}
+
+.project-info__meta a {
+  color: rgb(140, 140, 140);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.project-info__meta a:hover {
+  color: rgb(230, 230, 230);
+}
+
+/* Stack on small screens */
+@media (max-width: 600px) {
+  .project-info {
+    grid-template-columns: 1fr;
+    gap: 16px 0;
+    padding: 32px 20px;
+  }
+}
+
+.project-layout {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 40px 80px 80px 40px;
+}
+
+.project-layout .slideshow-container {
+  flex: 1;          /* slider takes up remaining space */
+  min-width: 0;     /* prevents flex overflow */
+  margin: 0;        /* override any existing margins */
+}
+
+.project-layout .project-info {
+  flex: 0 0 340px;  /* info panel fixed width */
+  padding: 0;
+}
+
+/* Stack vertically on small screens */
+@media (max-width: 800px) {
+  .project-layout {
+    flex-direction: column;
+  }
+
+  .project-layout .project-info {
+    flex: none;
+    width: 100%;
+  }
+}

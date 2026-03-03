@@ -1,28 +1,40 @@
-let slideIndex = 1;
-showSlides(slideIndex);
+const rail   = document.getElementById('rail');
+const slides = rail.querySelectorAll('.mySlides');
+const total  = slides.length;
+let   idx    = 0;
+let   startX = null;
 
-// Next/previous controls
-function plusSlides(n) {
-  showSlides(slideIndex += n);
+// Build dots dynamically
+const dotsEl = document.getElementById('dots');
+slides.forEach((_, i) => {
+  const d = document.createElement('span');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.addEventListener('click', () => goTo(i));
+  dotsEl.appendChild(d);
+});
+
+function goTo(n) {
+  idx = (n + total) % total;
+  rail.style.transform = `translateX(-${idx * 100}%)`;
+  dotsEl.querySelectorAll('.dot').forEach((d, i) =>
+    d.classList.toggle('active', i === idx)
+  );
 }
 
-// Thumbnail image controls
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
+document.getElementById('btnPrev').addEventListener('click', () => goTo(idx - 1));
+document.getElementById('btnNext').addEventListener('click', () => goTo(idx + 1));
 
-function showSlides(n) {
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-  let dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
-}
+// Keyboard support
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft')  goTo(idx - 1);
+  if (e.key === 'ArrowRight') goTo(idx + 1);
+});
+
+// Touch / drag swipe
+rail.addEventListener('pointerdown', e => { startX = e.clientX; rail.setPointerCapture(e.pointerId); });
+rail.addEventListener('pointerup',   e => {
+  if (startX === null) return;
+  const dx = e.clientX - startX;
+  if (Math.abs(dx) > 40) goTo(dx < 0 ? idx + 1 : idx - 1);
+  startX = null;
+});
