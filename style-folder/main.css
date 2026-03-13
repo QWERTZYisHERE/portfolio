@@ -291,6 +291,7 @@ body {
     font-family: "Tomorrow";
     text-align: center;
     margin-bottom: 35px;
+    margin-top: 35px;
 }
 
 
@@ -404,7 +405,7 @@ body {
 
 .project-info {
     display: grid;
-    grid-template-columns: minmax(80px, 15%) 1fr;   
+    grid-template-columns: minmax(80px, 15%) 1fr;
     padding: clamp(16px, 3vw, 48px);
     gap: 0 clamp(16px, 3vw, 48px);
     max-width: 900px;
@@ -456,7 +457,7 @@ body {
 }
 
 /* Stack on small screens */
-@media (max-width: 600px) {
+@media (max-width: 1200px) {
     .project-info {
         grid-template-columns: 1fr;
         gap: 16px 0;
@@ -470,6 +471,7 @@ body {
     align-items: flex-start;
     gap: 10px;
     padding: 40px 80px 80px 80px;
+    border-bottom: 1px solid rgb(40, 40, 40);
 }
 
 .project-layout .slideshow-container {
@@ -485,23 +487,13 @@ body {
     /* takes up 2/3 of the space */
     min-width: 0;
     padding: 0;
-    
-}
-
-@media (max-width: 1000px) {
-    .project-info__desc {
-        width: 200px;
-        font-size: 16px;
-        font-weight: 400;
-        color: rgb(230, 230, 230);
-        line-height: 1.6;
-        margin: 0 0 28px;
-    }
 
 }
+
+
 
 /* Stack vertically on small screens */
-@media (max-width: 800px) {
+@media (max-width: 1200px) {
     .project-layout {
         flex-direction: column;
         gap: 20px;
@@ -522,3 +514,21 @@ body {
         margin: 0 0 28px;
     }
 }
+
+body {
+  animation-duration: 4s;
+  animation-name: slide-in;
+}
+
+@keyframes slide-in {
+  from {
+
+    opacity: 0;
+  }
+
+  to {
+
+    opacity: 1;
+  }
+}
+
