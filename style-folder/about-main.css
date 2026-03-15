@@ -662,5 +662,35 @@ img{
     }
 }
 
+@media (max-width: 600px) {
+    .project-layout {
+        flex-direction: column;
+        gap: 20px;
+        padding: 40px 80px 40px 40px;
+    }
+
+    .project-layout .project-info {
+        flex: none;
+        width: 70%;
+        grid-template-columns: 1fr;
+    }
+
+    .project-info__desc {
+        width: 350px;
+        font-size: 16px;
+        font-weight: 400;
+        color: rgb(230, 230, 230);
+        line-height: 1.6;
+        margin: 0 0 28px;
+    }
+
+    video{
+       
+    }
+    .slideshow-container {
+        width: 300px;
+    }
+}
+
 
 
