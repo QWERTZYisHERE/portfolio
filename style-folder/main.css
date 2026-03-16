@@ -570,6 +570,11 @@ body {
   animation-name: slide-in;
 }
 
+header {
+  animation-duration: 4s;
+  animation-name: slide-in;
+}
+
 @keyframes slide-in {
   from {
 

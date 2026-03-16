@@ -10,6 +10,87 @@
     text-align: center;
 }
 
+
 body {
     background-color: #000000;
+    animation-duration: 4s;
+    animation-name: slide-in;
+    font-family: VT323;
+}
+
+header {
+    animation-duration: 4s;
+    animation-name: slide-in;
+}
+
+@keyframes slide-in {
+    from {
+
+        opacity: 0;
+    }
+
+    to {
+
+        opacity: 1;
+    }
+}
+
+.title {
+    top: 0;
+    background-color: #000000;
+    -webkit-backface-visibility: hidden;
+    color: white;
+
+}
+
+.title:hover {
+    cursor: default;
+}
+
+.horizontal-scrolling-items {
+    display: flex;
+    white-space: nowrap;
+    margin-top: -15px;
+
+}
+
+
+
+.horizontal-scrolling-items__item_tall {
+
+    white-space: nowrap;
+    font-size: 100px;
+    animation-name: infiniteScroll;
+    animation-duration: 8.8s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+
+
+
+}
+
+.top {
+    margin-top: -15px;
+}
+
+.container2 {
+    overflow-x: hidden;
+}
+
+@keyframes infiniteScroll {
+    from {
+        transform: translateX(0)
+    }
+
+    to {
+        transform: translateX(-50%)
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        display: grid;
+        grid-template-columns: auto auto;
+        padding: 10px;
+    }
 }
