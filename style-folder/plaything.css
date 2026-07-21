@@ -10,17 +10,25 @@
     text-align: center;
 }
 
+video {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
 
 body {
     background-color: #000000;
     animation-duration: 4s;
     animation-name: slide-in;
+    animation-fill-mode: both;
     font-family: VT323;
 }
 
 header {
     animation-duration: 4s;
     animation-name: slide-in;
+    animation-fill-mode: both;
 }
 
 @keyframes slide-in {
@@ -32,6 +40,21 @@ header {
     to {
 
         opacity: 1;
+    }
+}
+
+/* Respect the OS-level "reduce motion" preference: stop the marquee and
+   fade-in from running instead of forcing them on everyone. */
+@media (prefers-reduced-motion: reduce) {
+
+    body,
+    header {
+        animation: none;
+        opacity: 1;
+    }
+
+    .horizontal-scrolling-items {
+        animation: none;
     }
 }
 
@@ -50,7 +73,14 @@ header {
 .horizontal-scrolling-items {
     display: flex;
     white-space: nowrap;
+    width: max-content;
     margin-top: -15px;
+    animation-name: infiniteScroll;
+    animation-duration: 18s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    will-change: transform;
+    backface-visibility: hidden;
 
 }
 
@@ -60,12 +90,6 @@ header {
 
     white-space: nowrap;
     font-size: 100px;
-    animation-name: infiniteScroll;
-    animation-duration: 8.8s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-
-
 
 }
 

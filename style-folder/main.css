@@ -163,17 +163,20 @@ body {
 .horizontal-scrolling-items {
     display: flex;
     white-space: nowrap;
+    width: max-content;
     margin-top: -15px;
+    animation-name: infiniteScroll;
+    animation-duration: 18s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    will-change: transform;
+    backface-visibility: hidden;
 
 }
 
 .horizontal-scrolling-items__item_small {
     white-space: nowrap;
     font-size: 50px;
-    animation-name: infiniteScroll;
-    animation-duration: 9s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
 
 
 }
@@ -182,10 +185,6 @@ body {
 
     white-space: nowrap;
     font-size: 100px;
-    animation-name: infiniteScroll;
-    animation-duration: 8.8s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
 
 
 
@@ -485,6 +484,44 @@ video{
     padding: 40px 80px 80px 80px;
     border-bottom: 1px solid rgb(40, 40, 40);
     justify-content: space-between;
+    scroll-snap-align: start;
+    opacity: 0;
+    transform: translateY(48px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* The header/title ticker is the snap point for the top of the page, so it
+   stays paired with the first project instead of getting snapped away by
+   its own separate snap point right below it. */
+.projects .project-layout:first-child {
+    scroll-snap-align: none;
+}
+
+.project-layout.is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+html {
+    scroll-snap-type: y proximity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-snap-type: none;
+    }
+
+    header {
+        scroll-snap-align: none;
+    }
+
+    .project-layout {
+        opacity: 1;
+        transform: none;
+        transition: none;
+        scroll-snap-align: none;
+    }
 }
 
 .project-layout .slideshow-container {
@@ -562,11 +599,14 @@ video{
 body {
   animation-duration: 4s;
   animation-name: slide-in;
+  animation-fill-mode: both;
 }
 
 header {
   animation-duration: 4s;
   animation-name: slide-in;
+  animation-fill-mode: both;
+  scroll-snap-align: start;
 }
 
 @keyframes slide-in {
@@ -578,6 +618,21 @@ header {
   to {
 
     opacity: 1;
+  }
+}
+
+/* Respect the OS-level "reduce motion" preference: stop the marquee and
+   fade-in from running instead of forcing them on everyone. */
+@media (prefers-reduced-motion: reduce) {
+
+  body,
+  header {
+    animation: none;
+    opacity: 1;
+  }
+
+  .horizontal-scrolling-items {
+    animation: none;
   }
 }
 
