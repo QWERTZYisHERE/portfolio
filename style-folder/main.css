@@ -423,6 +423,7 @@ video{
     font-weight: 400;
     color: rgb(230, 230, 230);
     padding-top: 4px;
+    font-weight: 500;
 }
 
 .project-info__body {

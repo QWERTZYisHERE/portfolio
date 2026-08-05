@@ -95,7 +95,7 @@ document.querySelectorAll('.slideshow-container').forEach(container => {
 });
 
 // Same lazy-load/lazy-play treatment for standalone videos that aren't
-// part of a slideshow (e.g. the grid on dig_playthings.html).
+// part of a slideshow (e.g. the grid on the Digital Playthings page).
 document.querySelectorAll('video').forEach(video => {
   if (video.closest('.mySlides')) return; // already handled above
 

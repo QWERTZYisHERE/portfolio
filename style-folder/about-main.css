@@ -44,6 +44,7 @@ img {
     display: block;
     margin-left: none;
     margin-right: auto;
+    filter: grayscale(100%);
 }
 
 .title-grid{
