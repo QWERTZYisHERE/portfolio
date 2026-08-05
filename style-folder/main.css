@@ -414,20 +414,22 @@ video{
     }
 }
 
-.project-info {
-    display: grid;
-    grid-template-columns: minmax(80px, 15%) 1fr;
-    padding: clamp(16px, 3vw, 48px);
-    gap: 0 clamp(16px, 3vw, 48px);
-    max-width: 900px;
-    font-family: "Tomorrow", sans-serif;
-}
-
 .project-info__title {
+    order: 1;
+    flex: 0 0 15%;
+    min-width: 80px;
+    font-family: "Tomorrow", sans-serif;
     font-size: 16px;
     font-weight: 400;
     color: rgb(230, 230, 230);
     padding-top: 4px;
+}
+
+.project-info__body {
+    order: 2;
+    flex: 2;
+    min-width: 0;
+    font-family: "Tomorrow", sans-serif;
 }
 
 .project-info__desc {
@@ -467,23 +469,13 @@ video{
     color: rgb(230, 230, 230);
 }
 
-/* Stack on small screens */
-@media (max-width: 1200px) {
-    .project-info {
-        grid-template-columns: 1fr;
-        gap: 16px 0;
-        padding: 32px 20px;
-    }
-}
-
 .project-layout {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    gap: 10px;
+    gap: clamp(16px, 3vw, 48px);
     padding: 40px 80px 80px 80px;
     border-bottom: 1px solid rgb(40, 40, 40);
-    justify-content: space-between;
     scroll-snap-align: start;
     opacity: 0;
     transform: translateY(48px);
@@ -525,6 +517,7 @@ html {
 }
 
 .project-layout .slideshow-container {
+    order: 3;
     flex: 1;
     flex-basis: 5%;
     /* takes up 1/3 of the space */
@@ -532,27 +525,27 @@ html {
     margin: 0;
 }
 
-.project-layout .project-info {
-    flex: 2;
-    /* takes up 2/3 of the space */
-    min-width: 0;
-    padding: 0;
-
-}
-
-
-
-/* Stack vertically on small screens */
+/* Stack vertically on small screens, media first: title, then the
+   slideshow/video, then the description text last. */
 @media (max-width: 1200px) {
     .project-layout {
         flex-direction: column;
         gap: 20px;
     }
 
-    .project-layout .project-info {
+    .project-info__title,
+    .project-layout .slideshow-container,
+    .project-info__body {
         flex: none;
         width: 100%;
-        grid-template-columns: 1fr;
+    }
+
+    .project-layout .slideshow-container {
+        order: 2;
+    }
+
+    .project-info__body {
+        order: 3;
     }
 
     .project-info__desc {
@@ -572,10 +565,9 @@ html {
         padding: 40px 80px 40px 40px;
     }
 
-    .project-layout .project-info {
-        flex: none;
+    .project-info__title,
+    .project-info__body {
         width: 70%;
-        grid-template-columns: 1fr;
     }
 
     .project-info__desc {
