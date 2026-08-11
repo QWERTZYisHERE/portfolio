@@ -480,6 +480,7 @@ video{
     scroll-snap-align: start;
     opacity: 0;
     transform: translateY(48px);
+    will-change: opacity, transform;
     transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }

@@ -1,3 +1,21 @@
+// Safari is much stricter than Chromium about a video being "ready enough"
+// to play: a play() call issued right as a video enters the viewport often
+// gets rejected there (even though it succeeds a moment later), and since
+// every play() below is wrapped in .catch(() => {}) to avoid unhandled
+// rejections, that failure otherwise just silently leaves the video stuck on
+// its poster/black frame. This retries once the video actually reports
+// enough data to play, instead of only trying the single initial call.
+function playWhenReady(video) {
+  const attempt = video.play();
+  if (attempt && typeof attempt.catch === 'function') {
+    attempt.catch(() => {
+      video.addEventListener('canplay', () => {
+        video.play().catch(() => {});
+      }, { once: true });
+    });
+  }
+}
+
 // Reveal each project as it scrolls into view (fade + rise). Runs first and
 // defensively, so a later error in this file can't strand sections at the
 // CSS's default opacity:0 — and if the browser lacks IntersectionObserver,
@@ -32,14 +50,15 @@ document.querySelectorAll('.slideshow-container').forEach(container => {
   let   startX = null;
   let   isNearViewport = false;
 
-  // Only the active slide's video should ever be loading/playing — the
-  // others sit at preload="none" until the user actually swipes to them.
+  // Only the active slide's video should ever be actually playing — the
+  // others stay paused (preload="metadata" keeps them cheap) until the user
+  // swipes to them.
   function syncVideos() {
     slides.forEach((slide, i) => {
       const video = slide.querySelector('video');
       if (!video) return;
       if (i === idx && isNearViewport) {
-        if (video.paused) video.play().catch(() => {});
+        if (video.paused) playWhenReady(video);
       } else {
         video.pause();
       }
@@ -102,7 +121,7 @@ document.querySelectorAll('video').forEach(video => {
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        video.play().catch(() => {});
+        playWhenReady(video);
       } else {
         video.pause();
       }
