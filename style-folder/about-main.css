@@ -38,7 +38,6 @@ img {
     display: block;
     margin-left: none;
     margin-right: auto;
-    filter: grayscale(100%);
 }
 
 .title-grid{
@@ -610,6 +609,16 @@ img{
 
 .project-info__meta a:hover {
     color: rgb(230, 230, 230);
+}
+
+.project-info__desc a {
+    color: rgb(230, 230, 230);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.project-info__desc a:hover {
+    color: rgb(140, 140, 140);
 }
 
 /* Stack on small screens */
