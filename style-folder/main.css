@@ -478,7 +478,7 @@ video{
     flex-direction: row;
     align-items: flex-start;
     gap: clamp(16px, 3vw, 48px);
-    padding: 40px 80px 80px 80px;
+    padding: 50px 80px 80px 80px;
     border-bottom: 1px solid rgb(40, 40, 40);
     scroll-snap-align: start;
     opacity: 0;
