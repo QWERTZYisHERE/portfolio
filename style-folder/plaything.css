@@ -19,28 +19,21 @@ video {
 
 body {
     background-color: #000000;
-    animation-duration: 4s;
-    animation-name: slide-in;
-    animation-fill-mode: both;
     font-family: VT323;
 }
 
+/* Held at opacity:0 until script.js's revealWhenReady() adds .is-loaded —
+   once window "load" fires and the first video's metadata is in, not on a
+   fixed timer that can finish before the media actually has. */
+body,
 header {
-    animation-duration: 4s;
-    animation-name: slide-in;
-    animation-fill-mode: both;
+    opacity: 0;
+    transition: opacity 1.4s ease;
 }
 
-@keyframes slide-in {
-    from {
-
-        opacity: 0;
-    }
-
-    to {
-
-        opacity: 1;
-    }
+html.is-loaded body,
+html.is-loaded header {
+    opacity: 1;
 }
 
 /* Respect the OS-level "reduce motion" preference: stop the marquee and
@@ -49,8 +42,8 @@ header {
 
     body,
     header {
-        animation: none;
         opacity: 1;
+        transition: none;
     }
 
     .horizontal-scrolling-items {
