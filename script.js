@@ -1,9 +1,9 @@
-// Hold the page's initial fade-in (see the body/header CSS) until the
-// essentials are actually ready — window "load" (fonts, eager images) plus
-// the first video's metadata, if there is one — instead of revealing on a
-// fixed-length timer that can finish before the media has. Capped at 4s so
-// a slow network or a resource that never fires never leaves the page stuck
-// invisible.
+// Hold the page's initial fade-in (see the body/header CSS) at opacity:0
+// until the essentials are actually ready — window "load" (fonts, eager
+// images) plus the first video being buffered enough to play through
+// without stalling — instead of revealing on a fixed-length timer that can
+// finish before the media has. Capped at 7s so a slow network or a resource
+// that never fires never leaves the page stuck invisible.
 (function revealWhenReady() {
   const root = document.documentElement;
   let revealed = false;
@@ -24,8 +24,8 @@
     const firstVideo = document.querySelector('video');
     if (firstVideo) {
       waiters.push(new Promise(resolve => {
-        if (firstVideo.readyState >= 1) resolve(); // HAVE_METADATA
-        else firstVideo.addEventListener('loadedmetadata', resolve, { once: true });
+        if (firstVideo.readyState >= 4) resolve(); // HAVE_ENOUGH_DATA
+        else firstVideo.addEventListener('canplaythrough', resolve, { once: true });
       }));
     }
 
@@ -34,7 +34,7 @@
     reveal();
   }
 
-  setTimeout(reveal, 4000);
+  setTimeout(reveal, 7000);
 })();
 
 // Safari is much stricter than Chromium about a video being "ready enough"
