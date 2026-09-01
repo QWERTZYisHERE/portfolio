@@ -2,8 +2,14 @@
 // until the essentials are actually ready — window "load" (fonts, eager
 // images) plus the first video being buffered enough to play through
 // without stalling — instead of revealing on a fixed-length timer that can
-// finish before the media has. Capped at 7s so a slow network or a resource
+// finish before the media has. Capped at 5s so a slow network or a resource
 // that never fires never leaves the page stuck invisible.
+//
+// This only applies the first time someone lands on the site in a tab: an
+// inline script at the top of <head> (before anything paints) checks
+// sessionStorage and, if this tab has already been on the site this
+// session, adds .is-loaded immediately — so clicking between pages you're
+// already on doesn't replay the same blank-then-fade-in every time.
 (function revealWhenReady() {
   const root = document.documentElement;
   let revealed = false;
@@ -11,6 +17,13 @@
     if (revealed) return;
     revealed = true;
     root.classList.add('is-loaded');
+    try { sessionStorage.setItem('siteVisited', '1'); } catch (e) {}
+  }
+
+  if (root.classList.contains('is-loaded')) {
+    // Already revealed by the inline <head> script — nothing to wait for.
+    revealed = true;
+    return;
   }
 
   try {
