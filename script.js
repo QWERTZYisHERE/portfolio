@@ -34,7 +34,7 @@
     reveal();
   }
 
-  setTimeout(reveal, 7000);
+  setTimeout(reveal, 5000);
 })();
 
 // Safari is much stricter than Chromium about a video being "ready enough"
