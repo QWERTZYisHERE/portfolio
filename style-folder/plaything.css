@@ -36,18 +36,16 @@ html.is-loaded header {
     opacity: 1;
 }
 
-/* Respect the OS-level "reduce motion" preference: stop the marquee and
-   fade-in from running instead of forcing them on everyone. */
+/* Respect the OS-level "reduce motion" preference: stop the fade-in from
+   running instead of forcing it on everyone. The marquee itself is driven
+   by the Web Animations API in script.js, which checks the same preference
+   before ever starting it. */
 @media (prefers-reduced-motion: reduce) {
 
     body,
     header {
         opacity: 1;
         transition: none;
-    }
-
-    .horizontal-scrolling-items {
-        animation: none;
     }
 }
 
@@ -68,10 +66,6 @@ html.is-loaded header {
     white-space: nowrap;
     width: max-content;
     margin-top: -15px;
-    animation-name: infiniteScroll;
-    animation-duration: 18s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
     will-change: transform;
     backface-visibility: hidden;
 
@@ -92,16 +86,6 @@ html.is-loaded header {
 
 .container2 {
     overflow-x: hidden;
-}
-
-@keyframes infiniteScroll {
-    from {
-        transform: translateX(0)
-    }
-
-    to {
-        transform: translateX(-50%)
-    }
 }
 
 @media (max-width: 600px) {

@@ -50,6 +50,58 @@
   setTimeout(reveal, 5000);
 })();
 
+// The header ticker (each .horizontal-scrolling-items row), driven by the
+// Web Animations API instead of a CSS @keyframes animation. Same visual
+// result — one row-width-per-cycle linear translateX loop, seamless because
+// each row's content is duplicated and the row is sized to width:max-content
+// so -50% is exactly one copy's width — but WAAPI gives every row a shared,
+// steady native timeline instead of leaving each element's CSS animation to
+// the browser's own (occasionally drifty) animation engine, and lets this
+// one spot honor prefers-reduced-motion instead of needing a parallel CSS
+// override kept in sync with it.
+//
+// A single fixed duration for every row (the old CSS approach) made them
+// LOOK like different speeds: the small rows (50px font, more repeats) and
+// the tall row (100px font, fewer repeats) don't have the same one-copy
+// pixel width, so covering that distance in the same time means different
+// px/sec. Instead, every row targets the same actual velocity — its
+// duration is derived from its own measured width, not a shared constant.
+//
+// That measurement has to happen AFTER the VT323 webfont has actually
+// loaded, not before: the CSS uses font-display:swap, so this script can
+// easily run while the browser is still rendering the ticker in a fallback
+// font and only swaps to VT323 (whose character widths differ, and by a
+// different ratio per row since the two rows aren't the same text) a moment
+// later. Measuring too early bakes in widths that go stale the instant the
+// swap happens, which is exactly what made the mismatch reappear when a
+// higher px/sec turned that same absolute error into a bigger fraction of
+// each (now shorter) loop.
+(function animateMarquee() {
+  const rows = document.querySelectorAll('.horizontal-scrolling-items');
+  if (!rows.length) return;
+  if (!('animate' in Element.prototype)) return; // very old browser: stays put, still readable
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const PIXELS_PER_SECOND = 130;
+
+  function start() {
+    rows.forEach(row => {
+      const oneCopyWidth = row.scrollWidth / 2; // content is duplicated exactly once, for the seamless loop
+      const duration = (oneCopyWidth / PIXELS_PER_SECOND) * 1000;
+      row.animate(
+        [{ transform: 'translateX(0)' }, { transform: 'translateX(-50%)' }],
+        { duration, iterations: Infinity, easing: 'linear' }
+      );
+    });
+  }
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(start, start);
+  } else {
+    start();
+  }
+})();
+
 // Safari is much stricter than Chromium about a video being "ready enough"
 // to play: a play() call issued right as a video enters the viewport often
 // gets rejected there (even though it succeeds a moment later), and since
